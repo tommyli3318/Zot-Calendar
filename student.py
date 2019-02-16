@@ -1,4 +1,4 @@
-import datetime
+import course
 
 class student:
 	def __init__(self, name: str) -> None:
@@ -41,4 +41,14 @@ class student:
 			if given_course.get_name() == course_name:
 				self.remove(given_course)
 		print("Course not found.") #Temporary error message if course isn't found
-	
+
+
+
+me = student("Tedrick")
+print("The name is " + me.get_name())
+me.set_name("Nathan")
+print("The new name is " + me.get_name())
+
+categories = ["Exam", "Quiz", "Assignment", "Lab"]
+weights = [.4, .3, .1, .1]
+me.add_course("OChem", categories, weights)
