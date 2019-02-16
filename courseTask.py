@@ -1,11 +1,10 @@
 import datetime
 
-class CourseTask:
+class course_task:
 	''' Creates a new course task with an associated deadline.
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def __init__(self, task_name: str, month: int, day: int, year: int) -> None:
-		#Name of piece and its x,y coordinates
 		self.task_name = task_name
 		self.deadline = datetime.date(year, month, date)
 		self.suggested_start_date = deadline - datetime.timedelta(7)
