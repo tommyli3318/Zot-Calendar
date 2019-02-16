@@ -79,11 +79,18 @@ class Student:
 			lookup.update({x: 100 for x in self.get_to_do(course.get_name(), True)})
 		# lookup is a dictionary of CourseTask object: number indicating urgency
 		# higher urgency number == more important
-
+		past_list = []
 		for task in lookup:
-			print((task.get_dl_obj() - task.get_today()).days)
-			lookup[task] -= (task.get_dl_obj() - task.get_today()).days
+			dl_diff = (task.get_dl_obj() - task.get_today()).days
+			if dl_diff < 0:
+				past_list.append(task)
+			else:
+				lookup[task] -= dl_diff
 			# add a bunch of more uregency-modifying algorithms
+			
+
+		for task in past_list:
+			del lookup[task]
 
 		rec_list = sorted(lookup, key= lambda x: -lookup[x])
 
@@ -127,6 +134,7 @@ print(f"me Algorithm: {temp2}")
 
 
 
+##########################TESTING RECOMMENDATION()#########################
 me2 = Student("Tedrick")
 categories3 = ["Midterm", "Final", "Project"]
 weights3 = [.25, .5, .25]
@@ -134,11 +142,15 @@ me2.add_course("OS", categories3, weights3)
 me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
 me2.add_grade("OS", "Amazing final", "Final", 86, 100)
 me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
+
 me2.add_task("OS", "reading 1", 2, 18, 2019)
 me2.add_task("OS", "reading 2", 2, 20, 2019)
 me2.add_course("OChem", categories, weights)
+me2.add_task("OChem", "r3", 1, 10, 2020)
+
 me2.add_task("OChem", "r1", 1, 18, 2019)
 me2.add_task("OChem", "r2", 2, 10, 2019)
+
 
 
 
