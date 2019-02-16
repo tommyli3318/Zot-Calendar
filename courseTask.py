@@ -28,15 +28,15 @@ class CourseTask:
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def get_deadline(self) -> str:
-		return self.deadline.strftime("%Y%m%d")
+		return self.deadline.strftime("%m%d%Y")
 
 	def set_deadline(self, newmonth: int, newday: int, newyear: int):
 		if newmonth > 0:
-			self.deadline.replace(month = newmonth)
+			self.deadline = self.deadline.replace(month = newmonth)
 		if newday > 0:
-			self.deadline.replace(day = newday)
+			self.deadline = self.deadline.replace(day = newday)
 		if newyear > 0:
-			self.deadline.replace(year = newyear)
+			self.deadline = self.deadline.replace(year = newyear)
 
 	'''Accessors and mutators for the suggested start date. 
 	Note that the accessor returns the date in string format of ISO (YYYYMMDD). 
@@ -64,18 +64,18 @@ class CourseTask:
 			self.suggested_start_date.replace(year = newyear)
 	'''
 
-
-test1 = CourseTask("Intro to OS", "Kernel Assignment 1", 3, 2, 2019)
-test2 = CourseTask("Intro to OS", "Kernel Assignment 2", 3, 15, 2019)
-test3 = CourseTask("Intro to OS", "Mid term", 3, 19, 2019)
-print(test1.get_task_type())
-test2.set_task_type("Warmup Assignment 3")
-print(test2.get_task_type())
-print(test3.get_course())
-test3.set_course("Intro to A.I.")
-print(test3.get_course())
-print("Your homework is due on " + test1.get_deadline())
-test1.set_deadline(2, 15, 2019)
-print("Your homework is now due on " + test1.get_deadline())
-test1.set_deadline(4, 0, 0)
-print("Your new homework is now due on " + test1.get_deadline())
+if __name__ == "__main__":
+	test1 = CourseTask("Intro to OS", "Kernel Assignment 1", 3, 2, 2019)
+	test2 = CourseTask("Intro to OS", "Kernel Assignment 2", 3, 15, 2019)
+	test3 = CourseTask("Intro to OS", "Mid term", 3, 19, 2019)
+	print(test1.get_task_type())
+	test2.set_task_type("Warmup Assignment 3")
+	print(test2.get_task_type())
+	print(test3.get_course())
+	test3.set_course("Intro to A.I.")
+	print(test3.get_course())
+	print("Your homework is due on " + test1.get_deadline())
+	test1.set_deadline(2, 15, 2019)
+	print("Your homework is now due on " + test1.get_deadline())
+	test1.set_deadline(4, 0, 0)
+	print("Your new homework is now due on " + test1.get_deadline())
