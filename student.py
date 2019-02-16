@@ -65,12 +65,22 @@ class Student:
 		else:
 			course_obj.add_task(desc,m,d,y)
 
-	def get_to_do(self, course_nm) -> list:
+	def get_to_do(self, course_nm, obj=False) -> list:
 		course_obj = self._search(course_nm)
 		if course_obj == None:
 			print("Course not found.") #Temporary error message if course isn't found
+		if obj:
+			return course_obj.get_to_do_obj()
 		return course_obj.get_to_do()
 
+
+
+	def get_recommendations(self):
+		lookup = {}
+		for course in self.courselist:
+			lookup.update({x: 1 for x in self.get_to_do(course.get_name(), True)})
+		print('TESTING--------------')
+		print(lookup)
 
 
 me = Student("Tedrick")
@@ -116,9 +126,16 @@ me2.add_grade("OS", "Amazing final", "Final", 86, 100)
 me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
 me2.add_task("OS", "reading 1", 2, 18, 2019)
 me2.add_task("OS", "reading 2", 2, 20, 2019)
+me2.add_course("OChem", categories, weights)
+me2.add_task("OChem", "r1", 2, 18, 2019)
+me2.add_task("OChem", "r2", 2, 10, 2019)
+
+
 
 temp3 = me2.get_to_do("OS")
 print(temp3)
 
 temp3 = me2.get_grade("OS")
 print(f"me2 OS: {temp3}")
+
+me2.get_recommendations()

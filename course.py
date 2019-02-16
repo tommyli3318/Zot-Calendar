@@ -47,6 +47,9 @@ class Course:
 	def get_to_do(self):
 		return [str(x) for x in self.to_do]
 
+	def get_to_do_obj(self):
+		return self.to_do
+
 	#def __str__(self):
 		#return self.course_name
 
