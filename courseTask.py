@@ -10,7 +10,7 @@ class course_task:
 		self.suggested_start_date = deadline - datetime.timedelta(7)
 	
 	'''Accessors and mutators for the task type.'''
-	def get_task_type(self):
+	def get_task_type(self) -> str:
 		return self.task_name
 	def set_task_type(self, new_task_type: str):
 		self.task_name = new_task_type
@@ -21,7 +21,7 @@ class course_task:
 	
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
-	def get_deadline(self):
+	def get_deadline(self) -> str:
 		return self.deadline.strftime("%Y%m%d")
 	def set_deadline(self, newmonth: int, newday: int, newyear: int):
 		if newmonth != 0:
@@ -37,7 +37,7 @@ class course_task:
 	
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
-	def get_suggested_start_date(self):
+	def get_suggested_start_date(self) -> str:
 		return self.suggested_start_date.strftime("%Y%m%d")
 	def set_suggested_start_date(self, newmonth: int, newday: int, newyear: int):
 		if newmonth != 0:
