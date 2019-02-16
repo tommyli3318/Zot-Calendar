@@ -23,7 +23,7 @@ class Course:
 	def remove_assignment(self, category: str, score: tuple) -> None:
 		del self.assignments[(name,category)]
 
-	def modify_assignment(self, category: str, n_score: tuple) -> None:
+	def set_assignment(self, name: str, category: str, n_score: tuple) -> None:
 		self.assignments[(name,category)] = n_score
 
 	def get_overall_score(self) -> float:
@@ -41,11 +41,11 @@ class Course:
 
 		return sum(cat_scores[cat] * self.category_weights[cat] for cat in cat_scores)
 
-'''
+"""
 testing = Course("math", {'homework': .3, 'tests': .7})
 testing.add_assignment("assignment 1", "homework", (10,10))
 testing.add_assignment("assignment 2", "homework", (5,10))
 testing.add_assignment("test 1", "tests", (8,10))
 print(testing.get_overall_score())
 #final grade : 78.5
-'''
+"""
