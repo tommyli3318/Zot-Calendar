@@ -1,8 +1,8 @@
 package csched.courseData;
 
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.LinkedList;
+import java.util.ArrayList; # list
+import java.util.TreeMap; # dict
+import java.util.LinkedList; # list
 
 public class Course 
 {
