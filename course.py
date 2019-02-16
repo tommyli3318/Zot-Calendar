@@ -1,6 +1,7 @@
 #import CourseTask
 
 class Course:
+	"""contains all the information for a specific course"""
 	def __init__(self, course_name: str, category_weights: dict) -> None:
 		self.course_name = course_name
 		self.category_weights = category_weights
