@@ -2,19 +2,25 @@ from datetime import *
 
 class CourseTask:
 	''' Creates a new course task with an associated deadline.
+	PRE: task_cat is one of the categories defined in Course or "Reading", which is its own special category
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
-	def __init__(self, course_nm: str, task_nm: str, month: int, day: int, year: int) -> None:
+	def __init__(self, course_nm: str, task_cat: str, task_nm: str, month: int, day: int, year: int) -> None:
 		self.course_nm = course_nm
+		self.task_cat = task_cat
 		self.task_nm = task_nm
 		self.deadline = date(year, month, day)
 		self.suggested_start_date = self.deadline
 	
-	'''Accessors and mutators for the course/task names.'''
+	'''Accessors and mutators for the course/task/category names.'''
 	def get_task_type(self) -> str:
 		return self.task_nm
 	def set_task_type(self, new_task_type: str):
 		self.task_nm = new_task_type
+	def get_task_cat(self) -> str:
+		return self.task_cat
+	def set_task_cat(self, new_task_cat: str):
+		self.task_cat = new_task_cat
 	def get_course(self) -> str:
 		return self.course_nm
 	def set_course(self, new_course: str):
