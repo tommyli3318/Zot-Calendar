@@ -39,7 +39,8 @@ class Course:
 			else:
 				cat_scores[cat] = cat_scores[cat][0]/cat_scores[cat][1]
 
-		return sum(cat_scores[cat] * self.category_weights[cat] for cat in cat_scores)
+		final_score = sum(cat_scores[cat] * self.category_weights[cat] for cat in cat_scores)
+		return round(final_score, 3)
 
 """
 testing = Course("math", {'homework': .3, 'tests': .7})
