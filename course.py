@@ -1,4 +1,4 @@
-#import CourseTask
+from courseTask import CourseTask
 
 class Course:
 	"""contains all the information for a specific course"""
@@ -43,6 +43,12 @@ class Course:
 
 		final_score = sum(cat_scores[cat] * self.category_weights[cat] for cat in cat_scores)
 		return round(final_score, 3)
+
+	def get_to_do(self):
+		return [str(x) for x in self.to_do]
+
+	#def __str__(self):
+		#return self.course_name
 
 """
 testing = Course("math", {'homework': .3, 'tests': .7})

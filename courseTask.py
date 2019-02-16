@@ -1,4 +1,4 @@
-import datetime
+from datetime import *
 
 class CourseTask:
 	''' Creates a new course task with an associated deadline.
@@ -6,8 +6,8 @@ class CourseTask:
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def __init__(self, task_name: str, month: int, day: int, year: int) -> None:
 		self.task_name = task_name
-		self.deadline = datetime.date(year, month, date)
-		self.suggested_start_date = deadline - datetime.timedelta(7)
+		self.deadline = date(year, month, day)
+		self.suggested_start_date = self.deadline - timedelta(7)
 	
 	'''Accessors and mutators for the task type.'''
 	def get_task_type(self) -> str:
@@ -41,8 +41,10 @@ class CourseTask:
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def get_suggested_start_date(self) -> str:
-		return self.suggested_start_date.strftime("%Y%m%d")
+		return self.suggested_start_date.strftime("%m%d%Y")
 
+	def __str__(self):
+		return f'Task name: {self.task_name}, Due date: {self.deadline.strftime("%m/%d/%Y")}'
 
 
 

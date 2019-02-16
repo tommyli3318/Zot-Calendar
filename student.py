@@ -59,18 +59,17 @@ class Student:
 
 	def add_task(self, course_nm: str, desc: str, m: int, d: int, y: int) -> None:
 		# add a CourseTask object to Couse.to_do (a list)
-		course_found = False
-		for c in self.courselist:
-			if c.get_name() == course_nm:
-				c.add_task(desc,m,d,y)
-				course_found = True
-		if not course_found:
+		course_obj = self._search(course_nm)
+		if course_obj == None:
 			print("Course not found.") #Temporary error message if course isn't found
+		else:
+			course_obj.add_task(desc,m,d,y)
 
-	def get_to_do(self, course_nm):
-		#for course
-		pass
-
+	def get_to_do(self, course_nm) -> list:
+		course_obj = self._search(course_nm)
+		if course_obj == None:
+			print("Course not found.") #Temporary error message if course isn't found
+		return course_obj.get_to_do()
 
 
 
@@ -115,6 +114,11 @@ me2.add_course("OS", categories3, weights3)
 me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
 me2.add_grade("OS", "Amazing final", "Final", 86, 100)
 me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
+me2.add_task("OS", "reading 1", 2, 18, 2019)
+me2.add_task("OS", "reading 2", 2, 20, 2019)
+
+temp3 = me2.get_to_do("OS")
+print(temp3)
 
 temp3 = me2.get_grade("OS")
 print(f"me2 OS: {temp3}")
