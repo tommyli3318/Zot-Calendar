@@ -1,4 +1,4 @@
-import course
+from course import Course
 
 class student:
 	def __init__(self, name: str) -> None:
@@ -21,7 +21,7 @@ class student:
 	
 	#Accessor for the grade. Compute the current grade of a course.
 	def get_grade(self, course_name: str) -> float:
-		for given_course in courselist:
+		for given_course in self.courselist:
 			if given_course.get_name() == course_name:
 				return given_course.get_overall_score()
 		print("Course not found.") #Temporary error message if course isn't found
@@ -33,7 +33,7 @@ class student:
 		cat_dict = {categories[i]: weights[i] for i in range(len(categories))}
 		#for index in range(len(categories)):										#OBSOLETE
 		#	cat_dict = {category: weights[index] for category in categories}		#OBSOLETE
-		self.courselist.append(course(course_name, cat_dict))
+		self.courselist.append(Course(course_name, cat_dict))
 	
 	#Remove a course from the student's course list
 	def remove_course(self, course_name: str, categories: list, weights: list) -> None:
@@ -52,3 +52,5 @@ print("The new name is " + me.get_name())
 categories = ["Exam", "Quiz", "Assignment", "Lab"]
 weights = [.4, .3, .1, .1]
 me.add_course("OChem", categories, weights)
+
+print(me.get_grade("OChem"))

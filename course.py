@@ -36,7 +36,8 @@ class Course:
 		for cat in cat_scores:
 			if cat_scores[cat][1] == 0:
 				cat_scores[cat] = 1.0
-			cat_scores[cat] = cat_scores[cat][0]/cat_scores[cat][1]
+			else:
+				cat_scores[cat] = cat_scores[cat][0]/cat_scores[cat][1]
 
 		return sum(cat_scores[cat] * self.category_weights[cat] for cat in cat_scores)
 
