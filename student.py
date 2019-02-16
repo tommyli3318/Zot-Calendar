@@ -73,14 +73,24 @@ class Student:
 			return course_obj.get_to_do_obj()
 		return course_obj.get_to_do()
 
-
-
 	def get_recommendations(self):
 		lookup = {}
 		for course in self.courselist:
-			lookup.update({x: 1 for x in self.get_to_do(course.get_name(), True)})
-		print('TESTING--------------')
-		print(lookup)
+			lookup.update({x: 100 for x in self.get_to_do(course.get_name(), True)})
+		# lookup is a dictionary of CourseTask object: number indicating urgency
+		# higher urgency number == more important
+
+		for task in lookup:
+			print((task.get_dl_obj() - task.get_today()).days)
+			lookup[task] -= (task.get_dl_obj() - task.get_today()).days
+			# add a bunch of more uregency-modifying algorithms
+
+		rec_list = sorted(lookup, key= lambda x: -lookup[x])
+
+		
+		# x is a CourseTask object
+		# rec_list = sorted(lookup, key= lambda x: int(x.get_deadline()))
+		return [str(x) for x in rec_list]
 
 
 me = Student("Tedrick")
@@ -127,7 +137,7 @@ me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
 me2.add_task("OS", "reading 1", 2, 18, 2019)
 me2.add_task("OS", "reading 2", 2, 20, 2019)
 me2.add_course("OChem", categories, weights)
-me2.add_task("OChem", "r1", 2, 18, 2019)
+me2.add_task("OChem", "r1", 1, 18, 2019)
 me2.add_task("OChem", "r2", 2, 10, 2019)
 
 
@@ -138,4 +148,4 @@ print(temp3)
 temp3 = me2.get_grade("OS")
 print(f"me2 OS: {temp3}")
 
-me2.get_recommendations()
+print(me2.get_recommendations())

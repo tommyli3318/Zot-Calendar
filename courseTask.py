@@ -28,7 +28,10 @@ class CourseTask:
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def get_deadline(self) -> str:
-		return self.deadline.strftime("%m%d%Y")
+		return self.deadline.strftime("%Y%m%d")
+
+	def get_dl_obj(self) -> "Date object":
+		return self.deadline
 
 	def set_deadline(self, newmonth: int, newday: int, newyear: int):
 		if newmonth > 0:
@@ -46,6 +49,9 @@ class CourseTask:
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def get_suggested_start_date(self) -> str:
 		return self.suggested_start_date.strftime("%m%d%Y")
+
+	def get_today(self) -> "Date object":
+ 		return date.today()
 
 	def __str__(self):
 		return f'Task for course {self.course_nm}: {self.task_nm}, Due date: {self.deadline.strftime("%m/%d/%Y")}'

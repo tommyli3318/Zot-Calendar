@@ -14,7 +14,7 @@ class Course:
 
 	def add_task(self, name: str, m: int, d: int, y: int) -> None:
 		# add a CourseTask objct
-		self.to_do.append(CourseTask(name,m,d,y))
+		self.to_do.append(CourseTask(self.course_name, name,m,d,y))
 
 	def add_grade(self, name: str, category: str, score: tuple) -> None:
 		self.assignments[(name,category)] = score
