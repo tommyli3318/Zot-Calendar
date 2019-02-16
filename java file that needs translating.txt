@@ -1,0 +1,155 @@
+package csched.courseData;
+
+import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.LinkedList;
+
+public class Course 
+{
+	private String courseName;
+	private ArrayList<String> categories;
+	private TreeMap<String, Integer> categoryWeights;
+	private LinkedList<CourseTask> courseMaterial;
+	private TreeMap<String, ArrayList<Double>> scoresInEachCat;
+	
+	
+	/*
+	 * Default constructor for a Course instance. Used as a template
+	 * for all other constructors.
+	 */
+	public Course()
+	{
+		this.courseName = "";
+		this.categories = new ArrayList<String>();
+		this.categoryWeights = new TreeMap<String, Integer>();
+		this.courseMaterial = new LinkedList<CourseTask>();
+		this.scoresInEachCat = new TreeMap<String, ArrayList<Double>>();
+	}
+	
+	/*
+	 * Custom constructor that only initializes the course name.
+	 */
+	public Course(String name)
+	{
+		this.courseName = name;
+		this.categories = new ArrayList<String>();
+		this.categoryWeights = new TreeMap<String, Integer>();
+		this.courseMaterial = new LinkedList<CourseTask>();
+		this.scoresInEachCat = new TreeMap<String, ArrayList<Double>>();
+	}
+	
+	/*
+	 * Custom constructor that initializes the course name and
+	 * categories of the class tasks.
+	 * 
+	 * PRE: categoryNames.size() == categoryWeightValues.size() && categoryNames.size() > 0 
+	 * PRE: All values in categoryWeightValues add up to 100
+	 */
+	public Course(String name, ArrayList<String> categoryNames, ArrayList<Integer> categoryWeightValues)
+	{
+		this.courseName = name;
+		this.categories = new ArrayList<String>(categoryNames);
+		this.categoryWeights = new TreeMap<String, Integer>();
+		for (int index = 0 ; index < categoryNames.size() ; index++)
+		{
+			categoryWeights.put(categoryNames.get(index), categoryWeightValues.get(index));
+		}
+		this.courseMaterial = new LinkedList<CourseTask>();
+		this.scoresInEachCat = new TreeMap<String, ArrayList<Double>>();
+	}
+	
+	/*
+	 * Accessors and mutators for the course name.
+	 */
+	public String getCourseName()
+	{
+		return this.courseName;
+	}
+	public void getCourseName(String newName)
+	{
+		this.courseName = newName;
+	}
+	
+	/*
+	 * Add a course task.
+	 * 
+	 * PRE: The dates provided follow the format MMDDYYYY
+	 * PRE: The provided dates are valid (i.e. not past dates!)
+	 */	
+	public boolean addTask(String task, int month, int day, int year)
+	{
+		if (this.categories.indexOf(task) == -1)
+		{
+			//If the task is not part of the valid categories, don't add anything and return false.
+			return false;
+		}
+		this.courseMaterial.add(new CourseTask(task, month, day, year));
+		return true;
+	}
+	
+	/*
+	 * Various mutators for the scores in each category.
+	 * 
+	 * PRE: score >= 0 for singular additions
+	 * PRE: score.size() > 0 for ArrayList addition
+	 */
+	public void addNewScore(String category, int score)
+	{
+		scoresInEachCat.get(category).add(new Double((double)score));
+	}
+	public void addNewScore(String category, double score)
+	{
+		scoresInEachCat.get(category).add(new Double(score));
+	}
+	public void addNewScore(String category, ArrayList<Double> score)
+	{
+		scoresInEachCat.get(category).addAll(score);
+	}
+
+	public void removeScore(String category, int score)
+	{
+		scoresInEachCat.get(category).remove(new Double((double)score));
+	}
+	public void removeScore(String category, double score)
+	{
+		scoresInEachCat.get(category).remove(new Double(score));
+	}
+	public void removeScore(String category, ArrayList<Double> score)
+	{
+		for (int index = 0 ; index < score.size() ; index++)
+		{
+			scoresInEachCat.get(category).remove(score.get(index));			
+		}
+	}
+	
+	public void modifyScore(String category, int oldScore, int newScore)
+	{
+		this.removeScore(category, oldScore);
+		this.addNewScore(category, newScore);
+	}
+	public void modifyScore(String category, double oldScore, double newScore)
+	{
+		this.removeScore(category, oldScore);
+		this.addNewScore(category, newScore);
+	}
+	
+	/*
+	 * Compute and return the overall grade of this course.
+	 */
+	public double getOverallScore()
+	{
+		double score = 0.0;
+		for (int index = 0 ; index < categories.size() ; index++)
+		{
+			ArrayList<Double> currList = scoresInEachCat.get(categories.get(index));
+			double weight = ((double)categoryWeights.get(categories.get(index)))/100.0;
+			double totalScoreInCurrentCategory = 0.0;
+			for (int innerIndex = 0 ; innerIndex < currList.size() ; innerIndex++)
+			{
+				totalScoreInCurrentCategory += currList.get(innerIndex);
+			}
+			score += totalScoreInCurrentCategory * weight;
+		}
+		return score;
+	}
+}
