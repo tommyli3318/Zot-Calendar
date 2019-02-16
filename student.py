@@ -5,39 +5,41 @@ class Student:
 		#Creates and initializes a new stduent instance
 		self.name = name
 		self.courselist = [] #List of Course instances
-		
-	#Accessors and mutators for the student name.
+	
+	def _search(self, course_nm) -> "Course object":
+		for c in self.courselist:
+			if c.get_name() == course_nm:
+				return c
+
+	#Accessors and mutators for the student name
 	def get_name(self) -> str:
 		return self.name
+	
 	def set_name(self, new_name: str):
 		self.name = new_name
 	
 	#Add an assignment 
 	def add_grade(self, course_nm: str, a_nm: str, category: str, points_g: int, points_p: int) -> None:
-		course_found = False
-		for given_course in self.courselist:
-			if given_course.get_name() == course_nm:
-				given_course.add_assignment(a_nm, category, (points_g, points_p))
-				course_found = True
-		if not course_found:
+		course_obj = self._search(course_nm)
+		if course_obj == None:
 			print("Course not found.") #Temporary error message if course isn't found
+		else:
+			course_obj.add_grade(a_nm, category, (points_g, points_p))
 	
 	def set_grade(self, course_nm: str, a_nm: str, category: str, n_points_g: int, n_points_p: int) -> None:
-		course_found = False
-		for given_course in self.courselist:
-			if given_course.get_name() == course_nm:
-				given_course.set_assignment(a_nm, category, (n_points_g, n_points_p))
-				course_found = True
-		if not course_found:
+		course_obj = self._search(course_nm)
+		if course_obj == None:
 			print("Course not found.") #Temporary error message if course isn't found
+		else:
+			course_obj.set_grade(a_nm, category, (n_points_g, n_points_p))
 
 	#Accessor for the grade. Compute the current grade of a course.
 	def get_grade(self, course_nm: str) -> float:
-		for given_course in self.courselist:
-			if given_course.get_name() == course_nm:
-				return given_course.get_overall_score()
-		print("Course not found.") #Temporary error message if course isn't found
-		return 0.0
+		course_obj = self._search(course_nm)
+		if course_obj == None:
+			print("Course not found.") #Temporary error message if course isn't found
+			return 0.0
+		return course_obj.get_overall_score()
 	
 	#Add a course to the student's course list
 	#PRE: len(categories) == len(weights) and len(categories) > 0
@@ -48,11 +50,27 @@ class Student:
 		self.courselist.append(Course(course_nm, cat_dict))
 	
 	#Remove a course from the student's course list
-	def remove_course(self, course_nm: str, categories: list, weights: list) -> None:
-		for given_course in self.courselist:
-			if given_course.get_name() == course_nm:
-				self.remove(given_course)
-		print("Course not found.") #Temporary error message if course isn't found
+	def remove_course(self, course_nm: str) -> None:
+		course_obj = self._search(course_nm)
+		if course_obj == None:
+			print("Course not found.") #Temporary error message if course isn't found
+		else:
+			self.courselist.remove(course_obj)
+
+	def add_task(self, course_nm: str, desc: str, m: int, d: int, y: int) -> None:
+		# add a CourseTask object to Couse.to_do (a list)
+		course_found = False
+		for c in self.courselist:
+			if c.get_name() == course_nm:
+				c.add_task(desc,m,d,y)
+				course_found = True
+		if not course_found:
+			print("Course not found.") #Temporary error message if course isn't found
+
+	def get_to_do(self, course_nm):
+		#for course
+		pass
+
 
 
 
@@ -81,9 +99,12 @@ me.add_grade("Algorithm", "Fucking kill me", "Final", 55, 100)
 me.set_grade("Algorithm", "Amazing midterm", "Midterm", 100, 100)
 me.add_grade("Algorithm", "Fucking kill me", "Final", 100, 100)
 
+me.remove_course("Algorithm")
 
-print(me.get_grade("OChem"))
-print(me.get_grade("Algorithm"))
+temp = me.get_grade("OChem")
+print(f"me Ochem: {temp}")
+temp2 = me.get_grade("Algorithm")
+print(f"me Algorithm: {temp2}")
 
 
 
@@ -94,4 +115,6 @@ me2.add_course("OS", categories3, weights3)
 me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
 me2.add_grade("OS", "Amazing final", "Final", 86, 100)
 me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
-print(me2.get_grade("OS"))
+
+temp3 = me2.get_grade("OS")
+print(f"me2 OS: {temp3}")

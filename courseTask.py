@@ -1,6 +1,6 @@
 import datetime
 
-class course_task:
+class CourseTask:
 	''' Creates a new course task with an associated deadline.
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
@@ -12,9 +12,11 @@ class course_task:
 	'''Accessors and mutators for the task type.'''
 	def get_task_type(self) -> str:
 		return self.task_name
+
 	def set_task_type(self, new_task_type: str):
 		self.task_name = new_task_type
 	
+
 	'''Accessors and mutators for the deadline. Note that the accessor
 	returns the date in string format of ISO (YYYYMMDD). If any parameter
 	for the mutator is 0, then do not change that field.
@@ -23,6 +25,7 @@ class course_task:
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def get_deadline(self) -> str:
 		return self.deadline.strftime("%Y%m%d")
+
 	def set_deadline(self, newmonth: int, newday: int, newyear: int):
 		if newmonth != 0:
 			self.deadline.replace(month = newmonth)
@@ -39,6 +42,13 @@ class course_task:
 	PRE: The provided dates are valid (i.e. not past dates!) '''
 	def get_suggested_start_date(self) -> str:
 		return self.suggested_start_date.strftime("%Y%m%d")
+
+
+
+
+
+	# move this into student.py
+	'''
 	def set_suggested_start_date(self, newmonth: int, newday: int, newyear: int):
 		if newmonth != 0:
 			self.suggested_start_date.replace(month = newmonth)
@@ -46,3 +56,4 @@ class course_task:
 			self.suggested_start_date.replace(day = newday)
 		if newyear != 0:
 			self.suggested_start_date.replace(year = newyear)
+	'''
