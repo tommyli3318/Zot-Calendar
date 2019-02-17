@@ -121,40 +121,6 @@ class Student:
 		return r_str
 
 
-'''
-me = Student("Tedrick")
-print("The name is " + me.get_name())
-me.set_name("Nathan")
-print("The new name is " + me.get_name())
-
-categories = ["Exam", "Quiz", "Assignment", "Lab"]
-weights = [.4, .3, .2, .1]
-me.add_course("OChem", categories, weights)
-me.add_grade("OChem", "Midterm1", "Exam", 77, 100)
-me.add_grade("OChem", "Midterm2", "Exam", 44, 100)
-me.add_grade("OChem", "Essay", "Assignment", 88, 97)
-me.add_grade("OChem", "Pop quiz 1", "Quiz", 3, 5)
-me.add_grade("OChem", "Pop quiz 2", "Quiz", 4, 5)
-me.add_grade("OChem", "Pop quiz 3", "Quiz", 4, 6)
-me.add_grade("OChem", "Distillation lab", "Lab", 10, 10)
-
-categories2 = ["Midterm", "Final"]
-weights2 = [.5, .5]
-me.add_course("Algorithm", categories2, weights2)
-me.add_grade("Algorithm", "Amazing midterm", "Midterm", 75, 100)
-me.add_grade("Algorithm", "Fucking kill me", "Final", 55, 100)
-#testing set_grade
-me.set_grade("Algorithm", "Amazing midterm", "Midterm", 100, 100)
-me.add_grade("Algorithm", "Fucking kill me", "Final", 100, 100)
-
-me.remove_course("Algorithm")
-
-temp = me.get_grade("OChem")
-print(f"me Ochem: {temp}")
-temp2 = me.get_grade("Algorithm")
-print(f"me Algorithm: {temp2}")
-'''
-
 if __name__ == "__main__":
 	##########################TESTING RECOMMENDATION()#########################
 	categories = ["Exam", "Quiz", "Assignment", "Lab"]
