@@ -74,7 +74,7 @@ class Student:
 			return course_obj.get_to_do_obj()
 		return course_obj.get_to_do()
 
-	def get_recommendations(self):
+	def get_recommendations(self) -> str:
 		lookup = {}
 		course_grades = {}
 		for course in self.courselist:
@@ -105,8 +105,6 @@ class Student:
 						overall_diff = course_obj.get_overall_score() - sim_score
 						lookup[task] += 50 * overall_diff
 
-
-
 		for task in past_list:
 			del lookup[task]
 
@@ -115,7 +113,12 @@ class Student:
 		
 		# x is a CourseTask object
 		# rec_list = sorted(lookup, key= lambda x: int(x.get_deadline()))
-		return [str(x) for x in rec_list]
+		
+		r_str = ""
+		for rank,item in enumerate([str(x) for x in rec_list], 1):
+			r_str += f"Priority {rank} --> {item}\n"
+
+		return r_str
 
 
 '''
@@ -152,35 +155,35 @@ temp2 = me.get_grade("Algorithm")
 print(f"me Algorithm: {temp2}")
 '''
 
+if __name__ == "__main__":
+	##########################TESTING RECOMMENDATION()#########################
+	categories = ["Exam", "Quiz", "Assignment", "Lab"]
+	weights = [.4, .3, .2, .1]
 
-##########################TESTING RECOMMENDATION()#########################
-categories = ["Exam", "Quiz", "Assignment", "Lab"]
-weights = [.4, .3, .2, .1]
-
-me2 = Student("Tedrick")
-categories3 = ["Midterm", "Final", "Project"]
-weights3 = [.25, .5, .25]
-me2.add_course("OS", categories3, weights3)
-me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
-me2.add_grade("OS", "Amazing final", "Final", 86, 100)
-me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
-me2.add_task("OS", "reading 1", 2, 18, 2019)
-me2.add_task("OS", "reading 2", 2, 19, 2019)
-
-
-me2.add_course("OChem", categories, weights)
-me2.add_grade("OChem", "q 1", "Quiz", 98, 100)
-me2.add_grade("OChem", "Ass 1", "Assignment", 86, 100)
-me2.add_grade("OChem", "e 1", "Exam", 65, 100)
-me2.add_grade("OChem", "lab 1", "Lab", 80, 100)
-me2.add_task("OChem", "Chem r1", 2, 18, 2019)
-me2.add_task("OChem", "chem r3", 2, 20, 2019)
-me2.add_task("OChem", "chem r2", 2, 19, 2019)
-me2.add_task("OChem", "EXAM 1", 2, 20, 2019, "Exam", 2000)
+	me2 = Student("Tedrick")
+	categories3 = ["Midterm", "Final", "Project"]
+	weights3 = [.25, .5, .25]
+	me2.add_course("OS", categories3, weights3)
+	me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
+	me2.add_grade("OS", "Amazing final", "Final", 86, 100)
+	me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
+	me2.add_task("OS", "reading 1", 2, 18, 2019)
+	me2.add_task("OS", "reading 2", 2, 19, 2019)
 
 
+	me2.add_course("OChem", categories, weights)
+	me2.add_grade("OChem", "q 1", "Quiz", 98, 100)
+	me2.add_grade("OChem", "Ass 1", "Assignment", 86, 100)
+	me2.add_grade("OChem", "e 1", "Exam", 65, 100)
+	me2.add_grade("OChem", "lab 1", "Lab", 80, 100)
+	me2.add_task("OChem", "Chem r1", 2, 18, 2019)
+	me2.add_task("OChem", "chem r3", 2, 20, 2019)
+	me2.add_task("OChem", "chem r2", 2, 19, 2019)
+	me2.add_task("OChem", "EXAM 1", 2, 20, 2019, "Exam", 2000)
 
-print(f'Student me2 OS course grade: {me2.get_grade("OS")}')
-print(f'Student me2 OChem course grade: {me2.get_grade("OChem")}')
 
-print(me2.get_recommendations())
+	print(f'Student me2 OS course grade: {me2.get_grade("OS")}')
+	print(f'Student me2 OChem course grade: {me2.get_grade("OChem")}')
+
+
+	print(me2.get_recommendations())
