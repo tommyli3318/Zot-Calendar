@@ -78,7 +78,7 @@ class Student:
 		course_grades = {}
 		for course in self.courselist:
 			lookup.update({x: 100 for x in self.get_to_do(course.get_name(), True)})
-			course_grades[course.get_name()] = course.get_overall_score()
+			course_grades[course.get_name()] = 100 * course.get_overall_score()
 		# lookup is a dictionary of CourseTask object: number indicating urgency
 		# higher urgency number == more important
 		past_list = []
@@ -90,10 +90,13 @@ class Student:
 				lookup[task] -= dl_diff
 				# add a bunch of more uregency-modifying algorithms
 				
-				# modify 
+				# modify urgency based on course grades
 				lookup[task] += 3 * abs(course_grades[task.get_course()] % 10 - 5)
+
+				# modify urgency based on assignment worth
+
+				# stimulate not doing the assignment, find out how much overall grade changes
 				
-			
 
 		for task in past_list:
 			del lookup[task]
@@ -106,6 +109,7 @@ class Student:
 		return [str(x) for x in rec_list]
 
 
+'''
 me = Student("Tedrick")
 print("The name is " + me.get_name())
 me.set_name("Nathan")
@@ -137,10 +141,13 @@ temp = me.get_grade("OChem")
 print(f"me Ochem: {temp}")
 temp2 = me.get_grade("Algorithm")
 print(f"me Algorithm: {temp2}")
-
+'''
 
 
 ##########################TESTING RECOMMENDATION()#########################
+categories = ["Exam", "Quiz", "Assignment", "Lab"]
+weights = [.4, .3, .2, .1]
+
 me2 = Student("Tedrick")
 categories3 = ["Midterm", "Final", "Project"]
 weights3 = [.25, .5, .25]
@@ -148,22 +155,22 @@ me2.add_course("OS", categories3, weights3)
 me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
 me2.add_grade("OS", "Amazing final", "Final", 86, 100)
 me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
-
 me2.add_task("OS", "reading 1", 2, 18, 2019)
-me2.add_task("OS", "reading 2", 2, 20, 2019)
+me2.add_task("OS", "reading 2", 2, 19, 2019)
+
+
 me2.add_course("OChem", categories, weights)
-me2.add_task("OChem", "r3", 1, 10, 2020)
+me2.add_grade("OChem", "q 1", "Quiz", 98, 100)
+me2.add_grade("OChem", "Ass 1", "Assignment", 86, 100)
+me2.add_grade("OChem", "e 1", "Exam", 65, 100)
+me2.add_grade("OChem", "lab 1", "Lab", 80, 100)
+me2.add_task("OChem", "Chem r1", 2, 18, 2019)
+me2.add_task("OChem", "chem r3", 2, 20, 2019)
+me2.add_task("OChem", "chem r2", 2, 19, 2019)
 
-me2.add_task("OChem", "r1", 1, 18, 2019)
-me2.add_task("OChem", "r2", 2, 10, 2019)
 
 
-
-
-temp3 = me2.get_to_do("OS")
-print(temp3)
-
-temp3 = me2.get_grade("OS")
-print(f"me2 OS: {temp3}")
+print(f'Student me2 OS course grade: {me2.get_grade("OS")}')
+print(f'Student me2 OChem course grade: {me2.get_grade("OChem")}')
 
 print(me2.get_recommendations())

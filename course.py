@@ -7,7 +7,7 @@ class Course:
 		self.category_weights = category_weights
 		# self.cat_scores = {n:(0,0) for n in self.category_weights} # {category: (n,d)}
 		self.assignments = {} #{(assignment_name, category) : (n,d)}
-		self.to_do = []
+		self.to_do = [] # list of task objects
 
 	def get_name(self) -> str:
 		return self.course_name
