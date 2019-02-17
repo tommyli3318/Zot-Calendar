@@ -121,35 +121,34 @@ class Student:
 		return r_str
 
 
-if __name__ == "__main__":
-	##########################TESTING RECOMMENDATION()#########################
-	categories = ["Exam", "Quiz", "Assignment", "Lab"]
-	weights = [.4, .3, .2, .1]
 
-	me2 = Student("Tedrick")
-	categories3 = ["Midterm", "Final", "Project"]
-	weights3 = [.25, .5, .25]
-	me2.add_course("OS", categories3, weights3)
-	me2.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
-	me2.add_grade("OS", "Amazing final", "Final", 86, 100)
-	me2.add_grade("OS", "Kernel assignment", "Project", 107, 100)
-	me2.add_task("OS", "reading 1", 2, 18, 2019)
-	me2.add_task("OS", "reading 2", 2, 19, 2019)
+##########################TESTING RECOMMENDATION()#########################
+categories = ["Exam", "Quiz", "Assignment", "Lab"]
+weights = [.4, .3, .2, .1]
 
-
-	me2.add_course("OChem", categories, weights)
-	me2.add_grade("OChem", "q 1", "Quiz", 98, 100)
-	me2.add_grade("OChem", "Ass 1", "Assignment", 86, 100)
-	me2.add_grade("OChem", "e 1", "Exam", 65, 100)
-	me2.add_grade("OChem", "lab 1", "Lab", 80, 100)
-	me2.add_task("OChem", "Chem r1", 2, 18, 2019)
-	me2.add_task("OChem", "chem r3", 2, 20, 2019)
-	me2.add_task("OChem", "chem r2", 2, 19, 2019)
-	me2.add_task("OChem", "EXAM 1", 2, 20, 2019, "Exam", 2000)
+stu1 = Student("Tedrick")
+categories3 = ["Midterm", "Final", "Project"]
+weights3 = [.25, .5, .25]
+stu1.add_course("OS", categories3, weights3)
+stu1.add_grade("OS", "Amazing midterm", "Midterm", 98, 100)
+stu1.add_grade("OS", "Amazing final", "Final", 86, 100)
+stu1.add_grade("OS", "Kernel assignment", "Project", 107, 100)
+stu1.add_task("OS", "reading 1", 2, 18, 2019)
+stu1.add_task("OS", "reading 2", 2, 19, 2019)
 
 
-	print(f'Student me2 OS course grade: {me2.get_grade("OS")}')
-	print(f'Student me2 OChem course grade: {me2.get_grade("OChem")}')
+stu1.add_course("OChem", categories, weights)
+stu1.add_grade("OChem", "q 1", "Quiz", 98, 100)
+stu1.add_grade("OChem", "Ass 1", "Assignment", 86, 100)
+stu1.add_grade("OChem", "e 1", "Exam", 65, 100)
+stu1.add_grade("OChem", "lab 1", "Lab", 80, 100)
+stu1.add_task("OChem", "Chem r1", 2, 18, 2019)
+stu1.add_task("OChem", "chem r3", 2, 20, 2019)
+stu1.add_task("OChem", "chem r2", 2, 19, 2019)
+stu1.add_task("OChem", "EXAM 1", 2, 20, 2019, "Exam", 2000)
 
 
-	print(me2.get_recommendations())
+#print(f'Student stu1 OS course grade: {stu1.get_grade("OS")}')
+#print(f'Student stu1 OChem course grade: {stu1.get_grade("OChem")}')
+
+#print(stu1.get_recommendations())
