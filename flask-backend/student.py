@@ -74,6 +74,12 @@ class Student:
 			return course_obj.get_to_do_obj()
 		return course_obj.get_to_do()
 
+	def get_all_do_do(self) -> str:
+		r_str = ""
+		for course in self.courselist:
+			r_str += course.get_to_do()
+		return r_str
+
 	def get_recommendations(self) -> str:
 		lookup = {}
 		course_grades = {}
