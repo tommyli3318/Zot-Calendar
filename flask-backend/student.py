@@ -104,7 +104,6 @@ class Student:
 						sim_score = course_obj.get_simulated_score(task.get_task_cat(), task.get_pp())
 						overall_diff = course_obj.get_overall_score() - sim_score
 						lookup[task] += 50 * overall_diff
-
 		for task in past_list:
 			del lookup[task]
 
@@ -116,7 +115,7 @@ class Student:
 		
 		r_list = []
 		for rank,item in enumerate([str(x) for x in rec_list], 1):
-			r_list.append(f"{rank} {item}")
+			r_list.append(f"Priority #{rank} - {item}")
 
 		return {"hw": r_list}
 		"""		

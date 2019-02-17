@@ -40,6 +40,9 @@ def my_index():
 	return json.dumps(stu1_rec)
 
 
+	
+
+
 """
 @app.route("/api/info")
 def my_index(id, methods=["POST"]):
