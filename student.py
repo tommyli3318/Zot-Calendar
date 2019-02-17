@@ -57,13 +57,14 @@ class Student:
 		else:
 			self.courselist.remove(course_obj)
 
-	def add_task(self, course_nm: str, desc: str, m: int, d: int, y: int) -> None:
+	def add_task(self, course_nm: str, desc: str, m: int, d: int, y: int, \
+			task_cat: str = None, points_p = 0) -> None:
 		# add a CourseTask object to Couse.to_do (a list)
 		course_obj = self._search(course_nm)
 		if course_obj == None:
 			print("Course not found.") #Temporary error message if course isn't found
 		else:
-			course_obj.add_task(desc,m,d,y)
+			course_obj.add_task(desc,m,d,y,task_cat,points_p)
 
 	def get_to_do(self, course_nm, obj=False) -> list:
 		course_obj = self._search(course_nm)
@@ -94,15 +95,17 @@ class Student:
 				lookup[task] += 3 * abs(course_grades[task.get_course()] % 10 - 5)
 
 				# modify urgency based on assignment worth
-
 				# simulate not doing the assignment, find out how much overall grade changes
 				# ONLY IF the assignment has a valid category and obtainable points 
 				# (e.g. reading assignments will not impact your grade)
 				if task.get_task_cat() != None and task.get_pp() != 0:
 					course_obj = self._search(task.get_course())
 					if course_obj != None:
-						simscore = course_obj.get_simulated_score(task.get_task_cat(), task.get_pp())
-				
+						sim_score = course_obj.get_simulated_score(task.get_task_cat(), task.get_pp())
+						overall_diff = course_obj.get_overall_score() - sim_score
+						lookup[task] += 50 * overall_diff
+
+
 
 		for task in past_list:
 			del lookup[task]
@@ -173,6 +176,7 @@ me2.add_grade("OChem", "lab 1", "Lab", 80, 100)
 me2.add_task("OChem", "Chem r1", 2, 18, 2019)
 me2.add_task("OChem", "chem r3", 2, 20, 2019)
 me2.add_task("OChem", "chem r2", 2, 19, 2019)
+me2.add_task("OChem", "EXAM 1", 2, 20, 2019, "Exam", 2000)
 
 
 
