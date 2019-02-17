@@ -5,8 +5,8 @@ class CourseTask:
 	PRE: task_cat is one of the categories defined in Course or "Reading", which is its own special category
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
-	def __init__(self, course_nm: str, task_nm: str, month: int, \
-			day: int, year: int, task_cat: str = None, points_p = 0) -> None:
+	def __init__(self, course_nm: str, task_nm: str, \
+			month: int, day: int, year: int, task_cat: str = None, points_p = 0) -> None:
 		self.course_nm = course_nm
 		self.task_cat = task_cat
 		self.task_nm = task_nm
@@ -28,6 +28,12 @@ class CourseTask:
 	def set_course(self, new_course: str):
 		self.course_nm = new_course
 	
+	#Accessor and mutator for possible points from this assignment
+	def get_pp(self) -> int:
+		return self.points_p
+	def set_pp(self, points_p: int):
+		self.points_p = points_p
+
 
 	'''Accessors and mutators for the deadline. Note that the accessor
 	returns the date in string format of ISO (YYYYMMDD). If any parameter

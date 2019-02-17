@@ -95,7 +95,13 @@ class Student:
 
 				# modify urgency based on assignment worth
 
-				# stimulate not doing the assignment, find out how much overall grade changes
+				# simulate not doing the assignment, find out how much overall grade changes
+				# ONLY IF the assignment has a valid category and obtainable points 
+				# (e.g. reading assignments will not impact your grade)
+				if task.get_task_cat() != None and task.get_pp() != 0:
+					course_obj = self._search(task.get_course())
+					if course_obj != None:
+						simscore = course_obj.get_simulated_score(task.get_task_cat(), task.get_pp())
 				
 
 		for task in past_list:

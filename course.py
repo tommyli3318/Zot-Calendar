@@ -44,6 +44,14 @@ class Course:
 
 		final_score = sum(cat_scores[cat] * self.category_weights[cat] for cat in cat_scores)
 		return round(final_score, 3)
+		
+	def get_simulated_score(self, category: str, pp: int) -> float:
+		save = self
+		self.add_grade("temp", category, (0, pp))
+		tempscore = self.get_overall_score()
+		del self.assignments[("temp",category)]
+		self = save
+		return round(tempscore, 3)
 
 	def get_to_do(self):
 		return [str(x) for x in self.to_do]
