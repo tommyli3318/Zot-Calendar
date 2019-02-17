@@ -68,7 +68,7 @@ class CourseTask:
  		return date.today()
 
 	def __str__(self):
-		return f'Task for course {self.course_nm}: {self.task_nm}, Due date: {self.deadline.strftime("%m/%d/%Y")}'
+		return f'{self.course_nm} {self.task_nm}, Date: {self.deadline.strftime("%m/%d/%Y")}'
 
 
 
