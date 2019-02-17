@@ -114,11 +114,11 @@ class Student:
 		# x is a CourseTask object
 		# rec_list = sorted(lookup, key= lambda x: int(x.get_deadline()))
 		
-		r_dict = {}
+		r_list = []
 		for rank,item in enumerate([str(x) for x in rec_list], 1):
-			r_dict[rank] = item
+			r_list.append(f"{rank} {item}")
 
-		return r_dict
+		return {"hw": r_list}
 		"""		
 		r_str = ""
 		for rank,item in enumerate([str(x) for x in rec_list], 1):
