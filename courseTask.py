@@ -5,7 +5,7 @@ class CourseTask:
 	PRE: task_cat is one of the categories defined in Course or "Reading", which is its own special category
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
-	def __init__(self, course_nm: str, task_cat: str, task_nm: str, month: int, day: int, year: int) -> None:
+	def __init__(self, course_nm: str, task_nm: str, month: int, day: int, year: int, task_cat: str = None) -> None:
 		self.course_nm = course_nm
 		self.task_cat = task_cat
 		self.task_nm = task_nm
@@ -77,9 +77,9 @@ class CourseTask:
 	'''
 
 if __name__ == "__main__":
-	test1 = CourseTask("Intro to OS", "Kernel Assignment 1", 3, 2, 2019)
-	test2 = CourseTask("Intro to OS", "Kernel Assignment 2", 3, 15, 2019)
-	test3 = CourseTask("Intro to OS", "Mid term", 3, 19, 2019)
+	test1 = CourseTask("Intro to OS", "Kernel Assignment 1", 3, 2, 2019, "Project")
+	test2 = CourseTask("Intro to OS", "Kernel Assignment 2", 3, 15, 2019, "Project")
+	test3 = CourseTask("Intro to OS", "Mid term", 3, 19, 2019, "Exam")
 	print(test1.get_task_type())
 	test2.set_task_type("Warmup Assignment 3")
 	print(test2.get_task_type())

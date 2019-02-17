@@ -75,8 +75,10 @@ class Student:
 
 	def get_recommendations(self):
 		lookup = {}
+		course_grades = {}
 		for course in self.courselist:
 			lookup.update({x: 100 for x in self.get_to_do(course.get_name(), True)})
+			course_grades[course.get_name()] = course.get_overall_score()
 		# lookup is a dictionary of CourseTask object: number indicating urgency
 		# higher urgency number == more important
 		past_list = []
@@ -86,7 +88,11 @@ class Student:
 				past_list.append(task)
 			else:
 				lookup[task] -= dl_diff
-			# add a bunch of more uregency-modifying algorithms
+				# add a bunch of more uregency-modifying algorithms
+				
+				# modify 
+				lookup[task] += 3 * abs(course_grades[task.get_course()] % 10 - 5)
+				
 			
 
 		for task in past_list:
