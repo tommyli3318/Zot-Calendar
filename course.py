@@ -1,5 +1,6 @@
 from courseTask import CourseTask
 
+
 class Course:
 	"""contains all the information for a specific course"""
 	def __init__(self, course_name: str, category_weights: dict) -> None:

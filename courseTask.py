@@ -5,12 +5,14 @@ class CourseTask:
 	PRE: task_cat is one of the categories defined in Course or "Reading", which is its own special category
 	PRE: The dates provided follow the format MMDDYYYY
 	PRE: The provided dates are valid (i.e. not past dates!) '''
-	def __init__(self, course_nm: str, task_nm: str, month: int, day: int, year: int, task_cat: str = None) -> None:
+	def __init__(self, course_nm: str, task_nm: str, month: int, \
+			day: int, year: int, task_cat: str = None, points_p = 0) -> None:
 		self.course_nm = course_nm
 		self.task_cat = task_cat
 		self.task_nm = task_nm
 		self.deadline = date(year, month, day)
 		self.suggested_start_date = self.deadline
+		self.points_p = points_p
 	
 	'''Accessors and mutators for the course/task/category names.'''
 	def get_task_type(self) -> str:
