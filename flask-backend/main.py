@@ -1,5 +1,7 @@
 import flask
 from student import Student
+from flask import request
+import json
 
 app = flask.Flask("__main__")
 
@@ -31,10 +33,18 @@ stu1_rec = stu1.get_recommendations()
 
 print(stu1_rec)
 
-@app.route("/")
+@app.route("/api/recs")
 def my_index():
+	return json.dumps(stu1_rec)
+
+
+"""
+@app.route("/api/info")
+def my_index(id, methods=["POST"]):
+	#data manipulation
+	request.body
 	return flask.render_template("index.html", rec0 = stu1_rec[0], rec1 = stu1_rec[1], rec2 = stu1_rec[2],\
 		rec3 = stu1_rec[3], rec4 = stu1_rec[4], rec5 = stu1_rec[5])
-
+"""
 
 app.run(debug=True)
