@@ -1,6 +1,7 @@
 import flask
 from student import Student
 from flask import request
+from flask_cors import cross_origin
 import json
 
 app = flask.Flask("__main__")
@@ -34,6 +35,7 @@ stu1_rec = stu1.get_recommendations()
 print(stu1_rec)
 
 @app.route("/api/recs")
+@cross_origin()
 def my_index():
 	return json.dumps(stu1_rec)
 
